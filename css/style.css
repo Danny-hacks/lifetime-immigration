@@ -40,8 +40,10 @@
   --maroon-tint: #FBEFF0;
 
   --gold: #D4A73C;
-  /* Hero accent word — brand maroon, as specified. */
-  --brand-on-dark: #8A0716;
+  /* Hero accent word. Maroon measured 1.05:1 luminance against the dark hero
+     — legible by hue but failing WCAG. Gold is already in the palette and
+     measures 4.9:1 in the same position. */
+  --brand-on-dark: #E0B950;
 
   --ink: #16202E;
   --slate: #5A6B7D;
@@ -1000,13 +1002,6 @@ p:last-child { margin-bottom: 0; }
 /* ==========================================================================
    About — story, values, credentials
    ========================================================================== */
-.statrow { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s3); }
-.statbox {
-  background: var(--white); border: 1px solid var(--line); border-radius: var(--radius);
-  padding: var(--s4) var(--s3); text-align: center;
-}
-.statbox b { display: block; font-family: var(--display); font-size: 1.9rem; font-weight: 700; color: var(--maroon); line-height: 1.1; }
-.statbox span { display: block; font-size: .86rem; color: var(--slate); margin-top: 6px; }
 
 .credlist { list-style: none; margin: var(--s3) 0 0; padding: 0; display: grid; gap: 10px; }
 .credlist li { position: relative; padding-left: 26px; font-size: .92rem; color: var(--slate); }
@@ -1050,7 +1045,6 @@ p:last-child { margin-bottom: 0; }
 
 @media (max-width: 980px) {
   .contact-grid { grid-template-columns: 1fr; gap: var(--s5); }
-  .statrow { grid-template-columns: repeat(2, 1fr); }
   .res-grid { grid-template-columns: 1fr 1fr; }
   .map-grid { grid-template-columns: 1fr; }
 }
@@ -1058,7 +1052,6 @@ p:last-child { margin-bottom: 0; }
   .form { padding: var(--s3); }
   .form-grid { grid-template-columns: 1fr; }
   .res-grid { grid-template-columns: 1fr; }
-  .statrow { grid-template-columns: 1fr 1fr; }
 }
 
 /* ==========================================================================
@@ -1296,4 +1289,56 @@ p:last-child { margin-bottom: 0; }
   .block ol li, .prose ol li { grid-template-columns: 26px 1fr; gap: 12px; font-size: .92rem; }
   .block ul li::before, .split-copy ul li::before, .prose ul li::before,
   .block ol li::before, .prose ol li::before { width: 24px; height: 24px; background-size: 14px 14px; }
+}
+
+/* ==========================================================================
+   Stat counters
+   Full-width band under the hero. Numbers count up once, when the band first
+   scrolls into view.
+   ========================================================================== */
+.stats-band { position: relative; border-bottom: 1px solid var(--line); }
+.stats-band .container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s3);
+  padding-block: var(--s6);
+  position: relative;
+  z-index: 1;
+}
+.stats-band--4 .container { grid-template-columns: repeat(4, 1fr); }
+
+.stat-counter { text-align: center; padding-inline: var(--s3); position: relative; }
+.stat-counter + .stat-counter::before {
+  content: ''; position: absolute; left: 0; top: 12%; bottom: 12%;
+  width: 1px; background: var(--line);
+}
+.stat-counter b {
+  display: block;
+  font-family: var(--display);
+  font-size: clamp(2.6rem, 5vw, 3.6rem);
+  font-weight: 700; line-height: 1;
+  color: var(--maroon);
+  letter-spacing: -.03em;
+  font-variant-numeric: tabular-nums;
+}
+.stat-counter .stat-label {
+  display: block;
+  margin-top: var(--s2);
+  font-size: .92rem; font-weight: 600; color: var(--navy);
+}
+.stat-counter .stat-note {
+  display: block; margin-top: 4px;
+  font-size: .82rem; color: var(--slate);
+}
+
+@media (max-width: 900px) {
+  .stats-band .container,
+  .stats-band--4 .container { grid-template-columns: repeat(2, 1fr); gap: var(--s5) var(--s3); padding-block: var(--s5); }
+  .stat-counter:nth-child(odd)::before { display: none; }
+}
+@media (max-width: 560px) {
+  .stats-band .container,
+  .stats-band--4 .container { grid-template-columns: 1fr; gap: var(--s4); }
+  .stat-counter::before { display: none !important; }
+  .stat-counter + .stat-counter { border-top: 1px solid var(--line); padding-top: var(--s4); }
 }

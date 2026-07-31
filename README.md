@@ -225,6 +225,24 @@ reader:
 >
 > **After:** "Two decades. Thousands of families settled."
 
+
+## Placeholder figures
+
+The counter bands on the homepage and About page carry **illustrative numbers**, not confirmed
+ones. Only *20+ years* is supported by the client's own About page. Replace the `data-count`
+values in `src/pages/index.html` and `src/pages/about.html` with confirmed figures before
+launch — they are marked with an HTML comment in both files.
+
+| Shown | Status |
+|---|---|
+| 15,000+ families settled | Placeholder — needs confirming |
+| 20+ years of experience | Supported by their About page |
+| 40+ immigration programs | Placeholder — needs confirming |
+| 60+ countries served | Placeholder — needs confirming |
+
+The real testimonial count is **285** (54 published plus 231 unpublished in WordPress), if a
+verifiable figure is wanted in the meantime.
+
 ## To confirm with the client
 
 **The RCIC licence number conflicts between two of their own sources.**

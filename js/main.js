@@ -142,3 +142,60 @@
     });
   });
 })();
+
+/* --- Stat counters --------------------------------------------------------
+   Counts up once, the first time the band scrolls into view. Visitors who
+   prefer reduced motion get the final figure immediately. */
+(function () {
+  'use strict';
+  var counters = document.querySelectorAll('[data-count]');
+  if (!counters.length) return;
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function format(n) { return n.toLocaleString('en-CA'); }
+
+  function settle(el) {
+    el.textContent = format(Number(el.getAttribute('data-count'))) +
+                     (el.getAttribute('data-suffix') || '');
+  }
+
+  if (reduced || !('IntersectionObserver' in window)) {
+    Array.prototype.forEach.call(counters, settle);
+    return;
+  }
+
+  function run(el) {
+    var target = Number(el.getAttribute('data-count'));
+    var suffix = el.getAttribute('data-suffix') || '';
+    var duration = 1400;
+    var start = null;
+
+    function step(ts) {
+      if (start === null) start = ts;
+      var p = Math.min((ts - start) / duration, 1);
+      // ease-out so it decelerates into the final figure
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = format(Math.round(target * eased)) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      run(entry.target);
+      io.unobserve(entry.target);
+    });
+  }, { threshold: 0.4 });
+
+  Array.prototype.forEach.call(counters, function (el) { io.observe(el); });
+
+  // Safety net: never leave a counter showing its placeholder.
+  setTimeout(function () {
+    Array.prototype.forEach.call(counters, function (el) {
+      if (el.textContent.trim() === '0' || el.textContent.trim() === '') settle(el);
+    });
+  }, 4000);
+})();

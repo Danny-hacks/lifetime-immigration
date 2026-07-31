@@ -51,15 +51,13 @@
     });
   }
 
-  /* --- Language toggle (visual only in this mockup) --------------------- */
-  var langButtons = document.querySelectorAll('.lang-toggle button');
-  Array.prototype.forEach.call(langButtons, function (btn) {
-    btn.addEventListener('click', function () {
-      Array.prototype.forEach.call(langButtons, function (b) {
-        b.setAttribute('aria-pressed', String(b === btn));
-      });
-    });
-  });
+  /* --- Analytics ---------------------------------------------------------
+     Deliberately empty. The site currently makes zero third-party requests.
+     When paid acquisition starts, load a consent-gated GA4 + Meta Pixel here
+     and fire conversion events on enquiry submit and assessment click.
+     Note: the assessment form is on a different domain, so the conversion
+     happens off-site — that needs solving before ad attribution can work. */
+
 
   /* --- Continuous testimonial slider ------------------------------------ */
   var marquee = document.querySelector('[data-marquee]');

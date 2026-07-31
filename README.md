@@ -1,7 +1,7 @@
 # Lifetime Immigration — website rebuild
 
-A redesigned homepage for [lifetimeimmigration.com](https://www.lifetimeimmigration.com), built
-as a static site.
+A rebuild of [lifetimeimmigration.com](https://www.lifetimeimmigration.com) as a static site:
+nine pages, no framework, no third-party requests.
 
 ## Preview
 
@@ -15,55 +15,70 @@ python -m http.server 8000
 # then open http://localhost:8000
 ```
 
-To deploy: drag this folder onto Netlify. No build step, no dependencies, no `node_modules`.
+To deploy: connect the repo to Netlify with build command `node build.js` and publish
+directory `.` — no dependencies, no `node_modules`.
 
 ## Files
 
 ```
 build.js            assembles pages from src/ — run: node build.js
-src/layout.html     the page shell
-src/partials/       header.html, footer.html (shared across every page)
+src/layout.html     page shell (head, OG, canonical, JSON-LD)
+src/partials/       header.html, footer.html — shared across every page
 src/pages/          page sources — edit these, not the root .html files
 css/style.css       design tokens, layout, components, responsive rules
-js/main.js          mobile nav, language toggle, slider, scroll reveal
+js/main.js          mobile nav, testimonial slider, maps, scroll reveal
 img/ fonts/         assets
 
-index.html  immigrate.html  study.html
-visit-family.html  business.html  express-entry.html   <- generated, do not edit
+index.html  express-entry.html  provincial-nominee.html
+family-sponsorship.html  study-permits.html  business-immigration.html
+about.html  news.html  contact.html          <- generated, do not edit
+sitemap.xml  robots.txt                      <- generated
 ```
 
 ### Building
 
 ```bash
-node build.js     # writes the six .html files at the project root
+node build.js     # writes nine pages plus sitemap.xml and robots.txt
 ```
 
-No dependencies, no `npm install`, no framework — plain Node. On Netlify set the
-build command to `node build.js` and the publish directory to the project root.
+No dependencies, no `npm install`, no framework. On Netlify set the build command to
+`node build.js` and the publish directory to the project root.
 
-Page sources start with a JSON metadata block in an HTML comment:
+Page sources start with a JSON metadata block:
 
 ```html
-<!--{ "title": "...", "description": "...", "nav": "immigrate" }-->
+<!--{
+  "title": "...",
+  "description": "...",
+  "nav": "services",              marks the nav item current
+  "ogImage": "img/hero-x.jpg",    social share image
+  "localBusiness": true           adds the two office schema blocks
+}-->
 ```
-
-`nav` marks the matching top-level navigation item as current. Because the header and footer
-live in `src/partials/`, a navigation change is one edit, not six.
 
 ## Pages
 
 | Page | What it is |
 |---|---|
-| `index.html` | Homepage |
-| `services.html` | Our Services — all six services, plus settlement support |
-| `immigrate.html` | Permanent residence hub — Express Entry, PNP, Quebec, Atlantic |
-| `study.html` | Study permits, PGWP, IELTS/TEF coaching, institution placement |
-| `visit-family.html` | Visitor visa, super visa, spousal and parent sponsorship |
-| `business.html` | Start-Up Visa, Quebec investor, self-employed, provincial entrepreneur |
-| `express-entry.html` | Full programme page — eligibility, work experience, language, CRS |
-| `about.html` | Story, numbers, consultants, why regulation matters, process |
-| `resources.html` | News index, testimonial slider, payments |
-| `contact.html` | Enquiry form, office cards, hours, maps |
+| `index.html` | Homepage — seven sections |
+| `express-entry.html` | Federal Skilled Worker, Trades, Canadian Experience Class, CRS |
+| `provincial-nominee.html` | PNP streams, Quebec, Atlantic Immigration Program |
+| `family-sponsorship.html` | Visitor visa, super visa, spousal and parent sponsorship |
+| `study-permits.html` | Study permits, DLIs, PGWP, proof of funds, IELTS/TEF |
+| `business-immigration.html` | Start-Up Visa, Quebec, self-employed, provincial entrepreneur |
+| `about.html` | Story, consultants, settlement services, testimonials |
+| `news.html` | Immigration news index |
+| `contact.html` | Enquiry form, offices, maps, payments |
+
+**Navigation:** Home · Our Services ▾ · About Us · News · Contact Us. The Our Services dropdown
+goes straight to the five service pages — there is deliberately no hub landing page, because a
+short pillar page ranks for nothing and competes with its own children for the same terms.
+
+## Technical SEO
+
+Every page emits a canonical URL, Open Graph and Twitter card tags with a real share image, and
+`Organization` JSON-LD. About and Contact additionally carry `ProfessionalService` blocks for both
+offices. `sitemap.xml` and `robots.txt` are generated from the page list on every build.
 
 ### Contact form
 
@@ -79,15 +94,12 @@ site keeps its zero-third-party-request property on load — verified: no extern
 the click, the Google iframe appears after it. Both maps are built from the real office
 addresses.
 
-The inner-page hero follows the pattern used on lifetimeresettlement.com: a photographic band
-with an offset navy panel carrying the eyebrow, heading and standfirst.
-
 **Express Entry content is the client's own**, taken from the existing page and restructured —
 the three programmes, minimum requirements, selection factors, the NOC categories, the 1,560-hour
 rules and the CLB 7 / NCLC 7 language thresholds are all theirs. What changed is the presentation:
 proper tables instead of pasted screenshots, and the CRS diagram rendered once rather than twice.
 
-Total weight: **~4 MB** across six pages.
+Total weight: **~5.5 MB** across nine pages.
 
 ## Design direction
 
@@ -124,7 +136,6 @@ is already in the palette), or return to a light hero wash, where the true maroo
 - A short fact line under it (experience, offices, languages)
 - An accreditation strip naming the regulator, with its mark
 - Centred section headings — eyebrow, title, short accent rule
-- Icon service cards, four across
 - Numbered process steps, icon above the numeral, joined by a connecting line
 - A "meet your consultants" section with named credentials
 - Deep navy multi-column footer

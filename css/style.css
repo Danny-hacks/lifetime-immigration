@@ -121,7 +121,7 @@ p:last-child { margin-bottom: 0; }
 .section--navy h2, .section--navy h3 { color: var(--white); }
 
 /* Centred section heading — eyebrow, title, short accent rule */
-.sec-head { max-width: 720px; margin: 0 auto var(--s6); text-align: center; }
+.sec-head { max-width: 660px; margin: 0 auto var(--s6); text-align: center; }
 .sec-head--left { margin-inline: 0; text-align: left; }
 .sec-head .eyebrow {
   display: block;
@@ -257,7 +257,7 @@ p:last-child { margin-bottom: 0; }
 .hero-rule { width: 66px; height: 3px; background: var(--brand-on-dark); border-radius: 2px; margin: 0 auto var(--s3); }
 .hero-sub {
   font-size: 1.1rem; color: rgba(255,255,255,.92);
-  max-width: 62ch; margin: 0 auto var(--s5);
+  max-width: 620px; margin: 0 auto var(--s5);
 }
 .hero-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: var(--s2); margin-bottom: var(--s6); }
 
@@ -807,23 +807,10 @@ p:last-child { margin-bottom: 0; }
 .breadcrumb [aria-current] { color: var(--navy); font-weight: 600; }
 
 /* Prose column */
-.prose { max-width: 68ch; min-width: 0; }
+.prose { max-width: 640px; min-width: 0; }
 .prose h2 { font-size: clamp(1.5rem, 2.4vw, 1.95rem); margin-top: var(--s6); }
 .prose > h2:first-child { margin-top: 0; }
 .prose h3 { font-size: 1.12rem; margin-top: var(--s5); margin-bottom: var(--s2); }
-.prose ul, .prose ol { margin: 0 0 var(--s3); padding-left: 0; list-style: none; }
-.prose ul li, .prose ol li { position: relative; padding: 5px 0 5px 26px; }
-.prose ul li::before {
-  content: ''; position: absolute; left: 6px; top: 15px;
-  width: 6px; height: 6px; border-radius: 50%; background: var(--maroon);
-}
-.prose ol { counter-reset: n; }
-.prose ol li { counter-increment: n; }
-.prose ol li::before {
-  content: counter(n); position: absolute; left: 0; top: 5px;
-  font-size: .74rem; font-weight: 700; color: var(--maroon);
-  width: 18px; text-align: center;
-}
 
 /* Key facts box */
 .keyfacts {
@@ -841,27 +828,6 @@ p:last-child { margin-bottom: 0; }
 .keyfacts dt { font-weight: 700; color: var(--navy); flex: none; }
 .keyfacts dd { margin: 0; color: var(--slate); }
 
-/* Two-column page layout with a sticky rail */
-.page-grid { display: grid; grid-template-columns: minmax(0,1fr) 340px; gap: var(--s6); align-items: start; }
-.page-grid > * { min-width: 0; }
-.rail { position: sticky; top: 110px; display: grid; gap: var(--s3); }
-.rail-card {
-  background: var(--white); border: 1px solid var(--line);
-  border-radius: var(--radius); padding: var(--s4); box-shadow: var(--shadow);
-}
-.rail-card--accent { background: var(--navy); border-color: var(--navy); }
-.rail-card--accent h3 { color: var(--white); }
-.rail-card--accent p { color: rgba(255,255,255,.80); }
-.rail-card h3 { font-size: 1.08rem; margin-bottom: var(--s2); }
-.rail-card p { font-size: .89rem; color: var(--slate); margin-bottom: var(--s3); }
-.rail-card .btn { width: 100%; }
-.rail-links { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
-.rail-links a {
-  display: block; padding: 9px 12px; border-radius: 4px;
-  font-size: .9rem; color: var(--navy); text-decoration: none;
-  transition: background .2s, color .2s, transform .2s var(--ease);
-}
-.rail-links a:hover { background: var(--mist); color: var(--maroon); transform: translateX(3px); }
 
 /* Checklist */
 .checklist { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2) var(--s4); }
@@ -905,6 +871,7 @@ p:last-child { margin-bottom: 0; }
 .faq details[open] summary::after { transform: rotate(225deg) translate(-3px, -3px); }
 .faq summary:hover { color: var(--maroon); }
 .faq .faq-body { padding: 0 var(--s4) var(--s3); color: var(--slate); font-size: .94rem; }
+.faq .faq-body p { max-width: 580px; }
 
 /* Related programme cards */
 .related { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s3); }
@@ -939,8 +906,6 @@ p:last-child { margin-bottom: 0; }
 .nav > li > a.is-current::after { transform: scaleX(1); }
 
 @media (max-width: 980px) {
-  .page-grid { grid-template-columns: minmax(0,1fr); gap: var(--s5); }
-  .rail { position: static; grid-template-columns: 1fr 1fr; }
   .related { grid-template-columns: 1fr; }
 }
 @media (max-width: 700px) {
@@ -948,7 +913,6 @@ p:last-child { margin-bottom: 0; }
   .page-hero .container { padding-block: var(--s5); }
   .page-hero-panel { padding: var(--s3); }
   .page-hero::after { background: linear-gradient(90deg, rgba(10,26,48,.66), rgba(10,26,48,.34)); }
-  .rail { grid-template-columns: 1fr; }
   .checklist { grid-template-columns: 1fr; }
   .prose { max-width: none; }
   .prog { grid-template-columns: 44px minmax(0,1fr); gap: var(--s2) var(--s3); }
@@ -1095,4 +1059,241 @@ p:last-child { margin-bottom: 0; }
   .form-grid { grid-template-columns: 1fr; }
   .res-grid { grid-template-columns: 1fr; }
   .statrow { grid-template-columns: 1fr 1fr; }
+}
+
+/* ==========================================================================
+   Service page body
+   The .page-hero above these is deliberately unchanged.
+   ========================================================================== */
+
+
+/* --- Figure inside the prose column --------------------------------------
+   Breaks long text runs. express-entry.html previously ran 4,000px of prose
+   with no imagery at all. */
+.prose-figure { margin: var(--s5) 0; }
+.prose-figure img {
+  width: 100%; border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  aspect-ratio: 16 / 9; object-fit: cover;
+}
+.prose-figure figcaption {
+  margin-top: 10px; font-size: .84rem; color: var(--slate);
+  padding-left: 14px; border-left: 2px solid var(--line);
+}
+
+/* --- Callout --------------------------------------------------------------
+   For the sentences that actually save people money — the deadline traps and
+   eligibility gotchas that currently disappear into body text. */
+.callout {
+  position: relative;
+  margin: var(--s5) 0;
+  padding: var(--s3) var(--s4) var(--s3) var(--s5);
+  background: var(--maroon-tint);
+  border-left: 3px solid var(--maroon);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.callout::before {
+  content: '!';
+  position: absolute; left: 18px; top: var(--s3);
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--maroon); color: var(--white);
+  font-family: var(--sans); font-size: .78rem; font-weight: 700;
+  display: grid; place-items: center;
+}
+.callout p { font-size: .94rem; color: var(--ink); margin: 0; }
+.callout p + p { margin-top: var(--s2); }
+.callout strong { color: var(--maroon); }
+.callout--note { background: var(--mist); border-left-color: var(--navy); }
+.callout--note::before { content: 'i'; background: var(--navy); font-style: italic; }
+.callout--note strong { color: var(--navy); }
+
+/* --- Service cards --------------------------------------------------------
+   Replaces the .prog rows, whose paragraphs measured 891px — roughly 172
+   characters per line, about double a comfortable measure. */
+.service-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s3); }
+.service-cards--2 { grid-template-columns: repeat(2, 1fr); }
+.service-card {
+  display: flex; flex-direction: column;
+  background: var(--white); border: 1px solid var(--line);
+  border-radius: var(--radius); overflow: hidden;
+  text-decoration: none; color: inherit;
+  transition: transform .28s var(--ease), box-shadow .28s var(--ease), border-color .25s;
+}
+.service-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: transparent; }
+.service-card-media { aspect-ratio: 16 / 10; overflow: hidden; background: var(--mist); }
+.service-card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease); }
+.service-card:hover .service-card-media img { transform: scale(1.05); }
+.service-card-body { padding: var(--s3) var(--s4) var(--s4); display: flex; flex-direction: column; flex: 1; }
+.service-card h3 { font-size: 1.1rem; margin-bottom: var(--s2); }
+.service-card p { font-size: .92rem; color: var(--slate); margin-bottom: var(--s3); }
+.service-card .link-arrow { margin-top: auto; }
+
+/* --- Timeline -------------------------------------------------------------
+   Replaces the flat two-column checklist slab with numbered vertical steps. */
+.timeline { list-style: none; margin: 0; padding: 0; max-width: 780px; margin-inline: auto; counter-reset: t; }
+.timeline li {
+  position: relative;
+  display: grid; grid-template-columns: 52px 1fr; gap: var(--s3);
+  padding-bottom: var(--s4);
+}
+.timeline li:last-child { padding-bottom: 0; }
+/* connector between the numbered discs */
+.timeline li:not(:last-child)::before {
+  content: ''; position: absolute; left: 25px; top: 52px; bottom: 0;
+  width: 2px; background: rgba(255,255,255,.18);
+}
+.section:not(.section--navy) .timeline li:not(:last-child)::before { background: var(--line); }
+.timeline-num {
+  counter-increment: t;
+  width: 52px; height: 52px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-family: var(--display); font-weight: 700; font-size: 1.02rem;
+  background: var(--navy); color: var(--white);
+  border: 2px solid rgba(255,255,255,.28);
+  position: relative; z-index: 1;
+}
+.timeline-num::before { content: counter(t, decimal-leading-zero); }
+.section:not(.section--navy) .timeline-num { background: var(--maroon-tint); color: var(--maroon); border-color: var(--line); }
+.timeline h3 { font-size: 1.08rem; margin-bottom: 4px; padding-top: 12px; }
+.timeline p { font-size: .93rem; margin: 0; max-width: 560px; color: rgba(255,255,255,.76); }
+.section:not(.section--navy) .timeline p { color: var(--slate); }
+
+/* --- Table: give the key row a focal point -------------------------------- */
+.data-table tbody tr.is-total { background: var(--navy); color: var(--white); }
+.data-table tbody tr.is-total td { border-bottom: 0; font-weight: 600; }
+
+@media (max-width: 980px) {
+  .service-cards, .service-cards--2 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 700px) {
+  .service-cards, .service-cards--2 { grid-template-columns: 1fr; }
+  .callout { padding: var(--s3) var(--s3) var(--s3) var(--s5); }
+  .prose-figure { margin: var(--s4) 0; }
+  .timeline li { grid-template-columns: 42px 1fr; gap: var(--s2); }
+  .timeline-num { width: 42px; height: 42px; font-size: .9rem; }
+  .timeline li:not(:last-child)::before { left: 20px; top: 44px; }
+  .timeline h3 { padding-top: 8px; }
+}
+
+
+/* ==========================================================================
+   Section blocks (Elementor-mappable)
+   Each of these is a full-width band containing a simple column grid, so it
+   rebuilds as one Elementor section with 1–4 columns. No sidebar, no
+   long-form prose column.
+   ========================================================================== */
+
+/* Centred single column at a readable measure */
+.block { max-width: 760px; margin-inline: auto; }
+.block--wide { max-width: 940px; }
+.block h3 { margin-top: var(--s4); }
+.block h3:first-child { margin-top: 0; }
+.block p { color: var(--slate); }
+.section--navy .block p, .section--navy .block ul li { color: rgba(255,255,255,.8); }
+
+/* Two-column facts inside a block */
+.block-cols { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3) var(--s5); }
+
+/* Split section: image one side, copy the other. Alternates down the page. */
+.split--flip .split-media { order: 2; }
+.split-copy h3 { margin-top: var(--s4); font-size: 1.08rem; }
+.split-copy h3:first-child { margin-top: 0; }
+
+@media (max-width: 900px) {
+  .split--flip .split-media { order: -1; }
+  .block-cols { grid-template-columns: 1fr; gap: var(--s2); }
+}
+
+/* ==========================================================================
+   Icon lists
+   Replaces the plain dot bullets in body copy. Maps to Elementor's native
+   Icon List widget, so it rebuilds without custom CSS on the client side.
+   ========================================================================== */
+.block ul,
+.split-copy ul,
+.prose ul {
+  list-style: none;
+  margin: 0 0 var(--s3);
+  padding: 0;
+  display: grid;
+  gap: 2px;
+}
+.block ul li,
+.split-copy ul li,
+.prose ul li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: var(--s2);
+  align-items: start;
+  padding: 9px 0;
+  color: var(--ink);
+  font-size: .95rem;
+  line-height: 1.6;
+  border-bottom: 1px solid var(--line);
+}
+.block ul li:last-child,
+.split-copy ul li:last-child,
+.prose ul li:last-child { border-bottom: 0; }
+
+/* the marker: tinted rounded square with a maroon chevron */
+.block ul li::before,
+.split-copy ul li::before,
+.prose ul li::before {
+  content: '';
+  width: 26px; height: 26px;
+  border-radius: 7px;
+  background-color: var(--maroon-tint);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238A0716'%3E%3Cpath d='M9.4 18.4 8 17l5-5-5-5 1.4-1.4L15.8 12z'/%3E%3C/svg%3E");
+  background-size: 15px 15px;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: static;
+  top: auto; left: auto;
+  margin-top: 1px;
+}
+
+/* on dark bands, gold marker on a translucent tile */
+.section--navy .block ul li,
+.section--navy .split-copy ul li,
+.section--maroon .block ul li {
+  color: rgba(255,255,255,.86);
+  border-bottom-color: rgba(255,255,255,.14);
+}
+.section--navy .block ul li::before,
+.section--navy .split-copy ul li::before,
+.section--maroon .block ul li::before {
+  background-color: rgba(255,255,255,.12);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23D4A73C'%3E%3Cpath d='M9.4 18.4 8 17l5-5-5-5 1.4-1.4L15.8 12z'/%3E%3C/svg%3E");
+}
+
+/* two columns where a list is long and the items are short */
+.block ul.is-split { grid-template-columns: 1fr 1fr; gap: 2px var(--s5); }
+
+/* Numbered lists keep their counter, styled to match */
+.block ol, .prose ol { list-style: none; margin: 0 0 var(--s3); padding: 0; counter-reset: n; display: grid; gap: 2px; }
+.block ol li, .prose ol li {
+  counter-increment: n;
+  position: relative;
+  display: grid; grid-template-columns: 30px 1fr; gap: var(--s2);
+  align-items: start; padding: 9px 0;
+  color: var(--ink); font-size: .95rem; line-height: 1.6;
+  border-bottom: 1px solid var(--line);
+}
+.block ol li:last-child, .prose ol li:last-child { border-bottom: 0; }
+.block ol li::before, .prose ol li::before {
+  content: counter(n);
+  width: 26px; height: 26px; border-radius: 7px;
+  background: var(--maroon-tint); color: var(--maroon);
+  display: grid; place-items: center;
+  font-family: var(--display); font-size: .78rem; font-weight: 700;
+  position: static; top: auto; left: auto; margin-top: 1px;
+}
+
+@media (max-width: 700px) {
+  .block ul.is-split { grid-template-columns: 1fr; }
+  .block ul li, .split-copy ul li, .prose ul li,
+  .block ol li, .prose ol li { grid-template-columns: 26px 1fr; gap: 12px; font-size: .92rem; }
+  .block ul li::before, .split-copy ul li::before, .prose ul li::before,
+  .block ol li::before, .prose ol li::before { width: 24px; height: 24px; background-size: 14px 14px; }
 }

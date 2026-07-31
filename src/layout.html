@@ -5,9 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{title}}</title>
 <meta name="description" content="{{description}}">
+<link rel="canonical" href="{{siteUrl}}/{{slug}}">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lifetime Immigration">
+<meta property="og:locale" content="en_CA">
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{description}}">
+<meta property="og:url" content="{{siteUrl}}/{{slug}}">
+<meta property="og:image" content="{{siteUrl}}/{{ogImage}}">
+<meta property="og:image:width" content="1800">
+<meta property="og:image:height" content="620">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{title}}">
+<meta name="twitter:description" content="{{description}}">
+<meta name="twitter:image" content="{{siteUrl}}/{{ogImage}}">
+
 <link rel="preload" href="fonts/Inter-var.woff2" as="font" type="font/woff2" crossorigin>
 {{preload}}<link rel="stylesheet" href="css/style.css">
-</head>
+{{schema}}</head>
 <body>
 
 <a class="skip-link" href="#main">Skip to main content</a>

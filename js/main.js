@@ -143,6 +143,39 @@
   });
 })();
 
+/* --- Back to top -----------------------------------------------------------
+   Fades in once the visitor has scrolled past the first screen. */
+(function () {
+  'use strict';
+  var btn = document.querySelector('.back-to-top');
+  if (!btn) return;
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var threshold = 600;
+  var visible = false;
+  var hideTimer;
+
+  function update() {
+    var shouldShow = window.scrollY > threshold;
+    if (shouldShow === visible) return;
+    visible = shouldShow;
+    clearTimeout(hideTimer);
+    if (visible) btn.hidden = false;
+    btn.classList.toggle('is-visible', visible);
+    if (!visible) {
+      // keep it in the DOM through the fade-out, then drop it from the a11y tree
+      hideTimer = setTimeout(function () { btn.hidden = true; }, 250);
+    }
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+
+  btn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+  });
+})();
+
 /* --- Stat counters --------------------------------------------------------
    Counts up once, the first time the band scrolls into view. Visitors who
    prefer reduced motion get the final figure immediately. */

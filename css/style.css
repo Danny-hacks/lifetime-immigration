@@ -238,14 +238,14 @@ p:last-child { margin-bottom: 0; }
    Hero — full-bleed photograph, centred content
    ========================================================================== */
 /* Dark hero. The photograph is blurred slightly so the headline reads cleanly
-   over the flag's high-contrast red and white. */
+   over the busy photo behind it. */
 .hero { position: relative; isolation: isolate; overflow: hidden; text-align: center; color: var(--white); }
 .hero::before {
   content: ''; position: absolute; inset: 0; z-index: -2;
   background: url('../img/hero.jpg') center 42% / cover no-repeat;
-  filter: blur(2px);
+  filter: blur(1px);
   /* scaled up so the blur doesn't feather the section edges */
-  transform: scale(1.06);
+  transform: scale(1.03);
 }
 .hero::after {
   content: ''; position: absolute; inset: 0; z-index: -1;

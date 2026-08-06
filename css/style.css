@@ -350,17 +350,17 @@ p:last-child { margin-bottom: 0; }
 .program:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
 .program img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .55s var(--ease); }
 .program:hover img { transform: scale(1.07); }
-/* Heavier and earlier than before — the source photographs are busy, and the
-   copy has to stay legible over all four of them. */
+/* Lighter now that each card is just a headline — enough to keep the title
+   legible without hiding the photograph underneath it. */
 .program::after {
   content: ''; position: absolute; inset: 0;
   background: linear-gradient(180deg,
-    rgba(10,26,48,.30) 0%, rgba(10,26,48,.72) 42%, rgba(10,26,48,.96) 100%);
+    rgba(10,26,48,.06) 0%, rgba(10,26,48,.38) 42%, rgba(10,26,48,.66) 100%);
   transition: background .35s;
 }
 .program:hover::after {
   background: linear-gradient(180deg,
-    rgba(10,26,48,.36) 0%, rgba(10,26,48,.78) 42%, rgba(10,26,48,.97) 100%);
+    rgba(10,26,48,.12) 0%, rgba(10,26,48,.44) 42%, rgba(10,26,48,.72) 100%);
 }
 /* Simple photo box: a big headline and nothing else competing for attention. */
 .program-body {

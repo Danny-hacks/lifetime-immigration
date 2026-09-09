@@ -340,7 +340,7 @@ p:last-child { margin-bottom: 0; }
 /* ==========================================================================
    Programme cards (photo)
    ========================================================================== */
-.programs { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s3); }
+.programs { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s3); }
 .program {
   position: relative; display: flex; flex-direction: column; justify-content: flex-end;
   border-radius: var(--radius); overflow: hidden; background: var(--navy);
